@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from django.db.models.fields.related import OneToOneField
 
 
 HALF = '0.5'
@@ -47,3 +48,12 @@ class Vote(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+class RamenScore(models.Model):
+    ramen = models.OneToOneField(RamenYa, on_delete=models.CASCADE)
+    total_score = models.DecimalField(max_digits=2, decimal_places=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-total_score']
