@@ -67,6 +67,7 @@ class RamenScoreSerializer(serializers.ModelSerializer):
 class RamenScoreCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = RamenScore
+
         fields = [
             'ramen',
             'total_score'

@@ -13,7 +13,10 @@ class VoteList(APIView):
     
     def post(self, request, format=None):
         voter_ip = self.__get_voter_ip(request)
-        print('voter IP: {ip}'.format(ip=voter_ip))
+        if voter_ip:
+            ip_update = {'ip': voter_ip}
+            request.data.update(ip_update)
+   
         serializer = VoteCreateUpdateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
