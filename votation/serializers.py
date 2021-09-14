@@ -26,7 +26,6 @@ class VoteSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'ip',
-            'punctuation',
             'ramen',
             'created_at',
             'updated_at'
@@ -37,7 +36,6 @@ class VoteCreateUpdateSerializer(serializers.ModelSerializer):
         model = Vote
         fields = [
             'ip',
-            'punctuation',
             'ramen'
         ]
     
@@ -46,7 +44,6 @@ class VoteCreateUpdateSerializer(serializers.ModelSerializer):
     
     def update(self, instance, validated_data):
         instance.ip = instance.get('ip', instance.ip)
-        instance.punctuation = instance.get('punctuation', instance.punctuation)
         instance.ramen = instance.get('ramen', instance.ramen)
 
 
@@ -58,7 +55,7 @@ class RamenScoreSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'ramen',
-            'total_score',
+            'total_votes',
             'created_at',
             'updated_at'
         ]
@@ -70,7 +67,7 @@ class RamenScoreCreateUpdateSerializer(serializers.ModelSerializer):
 
         fields = [
             'ramen',
-            'total_score'
+            'total_votes'
         ]
 
         def create(self, validated_data):
@@ -78,6 +75,6 @@ class RamenScoreCreateUpdateSerializer(serializers.ModelSerializer):
 
         def update(self, instance, validated_data):
             instance.ramen = validated_data.get('ramen', instance.ramen)
-            instance.total_score = validated_data.get('ramen_score', instance.ramen_score)
+            instance.total_votes = validated_data.get('total_votes', instance.ramen_score)
             instance.save()
             return instance

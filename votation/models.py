@@ -3,19 +3,6 @@ from django.db.models.deletion import CASCADE
 from django.db.models.fields.related import OneToOneField
 from django.core.validators import RegexValidator
 
-ONE = 1
-TWO = 2
-THREE = 3
-FOUR = 4
-FIVE = 5
-PUNCTUATION_CHOICES = [
-    (ONE, "one"),
-    (TWO, "two"),
-    (THREE, "three"),
-    (FOUR, "four"),
-    (FIVE, "five"),
-]
-
 
 class RamenYa(models.Model):
     name = models.CharField(max_length=100, blank=True)
@@ -33,7 +20,6 @@ class RamenYa(models.Model):
 
 class Vote(models.Model):
     ip = models.GenericIPAddressField(db_index=True, unique=True)
-    punctuation = models.PositiveSmallIntegerField(choices=PUNCTUATION_CHOICES)
     ramen = models.ForeignKey(RamenYa, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -44,9 +30,9 @@ class Vote(models.Model):
 
 class RamenScore(models.Model):
     ramen = models.OneToOneField(RamenYa, on_delete=models.CASCADE)
-    total_score = models.DecimalField(max_digits=2, decimal_places=1)
+    total_votes = models.PositiveBigIntegerField(blank=True, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-total_score']
+        ordering = ['-total_votes']

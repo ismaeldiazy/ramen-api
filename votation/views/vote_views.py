@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+
 class VoteList(APIView):
     def get(self, request, format=None):
         ramen_pk = self.request.GET.get('ramen_pk', None)

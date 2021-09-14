@@ -44,6 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'votation.apps.VotationConfig',
+    'django_crontab',
+]
+
+CRONJOBS = [
+    ('* * * * *', 'votation.cron_jobs.update_score'),
+    ('* * * * *', 'votation.cron.update_score'),
 ]
 
 MIDDLEWARE = [
