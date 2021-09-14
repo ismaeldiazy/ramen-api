@@ -28,7 +28,7 @@ class VoteSerializer(serializers.ModelSerializer):
             'ip',
             'punctuation',
             'ramen',
-            'created_at'
+            'created_at',
             'updated_at'
         ]
 

@@ -1,3 +1,5 @@
+import json
+from json.encoder import JSONEncoder
 from votation.models import Vote
 from votation.serializers import VoteCreateUpdateSerializer, VoteSerializer
 from django.http import Http404
@@ -9,13 +11,15 @@ class VoteList(APIView):
     def get(self, request, format=None):
         ramen_pk = self.request.GET.get('ramen_pk', None)
         if ramen_pk:
-            vote_count = Vote.objects.filter(ramen_id=ramen_pk).count()
+            ramen_pk = int(ramen_pk)
+            vote_list = Vote.objects.filter(ramen_id=ramen_pk)
+            serializer = VoteSerializer(vote_list, many=True)
             response = {
                 'ramen_pk': ramen_pk,
-                'vote_count': vote_count,
-                'vote_list': 'placeholder'
+                'vote_count': vote_list.count(),
+                'vote_list': serializer.data
             }
-            return Response(response)
+            return Response(response, status=status.HTTP_200_OK)
             
         vote_list = Vote.objects.all()
         serializer = VoteSerializer(vote_list, many=True)
