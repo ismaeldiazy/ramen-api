@@ -7,6 +7,16 @@ from rest_framework import status
 
 class VoteList(APIView):
     def get(self, request, format=None):
+        ramen_pk = self.request.GET.get('ramen_pk', None)
+        if ramen_pk:
+            vote_count = Vote.objects.filter(ramen_id=ramen_pk).count()
+            response = {
+                'ramen_pk': ramen_pk,
+                'vote_count': vote_count,
+                'vote_list': 'placeholder'
+            }
+            return Response(response)
+            
         vote_list = Vote.objects.all()
         serializer = VoteSerializer(vote_list, many=True)
         return Response(serializer.data)
@@ -30,3 +40,9 @@ class VoteList(APIView):
         else:
             ip = request.META.get('REMOTE_ADDR')
         return ip
+
+# class VoteDetail(APIView):
+#     """
+#     Retrieve, update or delete a vote instance.
+#     """
+#     def get_object(self, pk):

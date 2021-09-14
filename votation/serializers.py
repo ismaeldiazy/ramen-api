@@ -42,13 +42,12 @@ class VoteCreateUpdateSerializer(serializers.ModelSerializer):
         ]
     
     def create(self, validated_data):
-        return Vote(**validated_data)
+        return Vote.objects.create(**validated_data)
     
     def update(self, instance, validated_data):
         instance.ip = instance.get('ip', instance.ip)
         instance.punctuation = instance.get('punctuation', instance.punctuation)
         instance.ramen = instance.get('ramen', instance.ramen)
-
 
 
 class RamenScoreSerializer(serializers.ModelSerializer):
@@ -64,6 +63,7 @@ class RamenScoreSerializer(serializers.ModelSerializer):
             'updated_at'
         ]
 
+
 class RamenScoreCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = RamenScore
@@ -74,7 +74,7 @@ class RamenScoreCreateUpdateSerializer(serializers.ModelSerializer):
         ]
 
         def create(self, validated_data):
-            return RamenScore(**validated_data)
+            return RamenScore.objects.create(**validated_data)
 
         def update(self, instance, validated_data):
             instance.ramen = validated_data.get('ramen', instance.ramen)
