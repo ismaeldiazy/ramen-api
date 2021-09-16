@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+
 class VoteList(APIView):
     def get(self, request, format=None):
         ramen_pk = self.request.GET.get('ramen_pk', None)
@@ -45,8 +46,31 @@ class VoteList(APIView):
             ip = request.META.get('REMOTE_ADDR')
         return ip
 
-# class VoteDetail(APIView):
-#     """
-#     Retrieve, update or delete a vote instance.
-#     """
-#     def get_object(self, pk):
+class VoteDetail(APIView):
+    """
+    Retrieve, update or delete a vote instance.
+    """
+    def get_object(self, pk):
+        try:
+            return Vote.objects.get(pk=pk)
+        except Vote.DoesNotExist:
+            raise Http404
+        
+    def get(self, request, pk, format=None):
+        vote = self.get_object(pk)
+        print(vote.ip)
+        serializer = VoteSerializer(vote)
+        return Response(serializer.data)
+    
+    def delete(self, request, pk, format=None):
+        vote = self.get_object(pk)
+        vote.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    def patch(self, request, pk, format=None):
+        vote = self.get_object(pk)
+        serializer = VoteCreateUpdateSerializer(vote, request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -1,0 +1,2 @@
+0000000000000000000000000000000000000000 449761b51ab9b23bf6ef1c774e3753e27581cb3d ismaeldiazy <ismaeldiazy@gmail.com> 1631636259 +0200	branch: Created from HEAD
+449761b51ab9b23bf6ef1c774e3753e27581cb3d e2dae721a8ce374c7b293e4fa342c9970ca9e453 ismaeldiazy <ismaeldiazy@gmail.com> 1631645942 +0200	commit: models simplified and added cron to update ramen score every minute

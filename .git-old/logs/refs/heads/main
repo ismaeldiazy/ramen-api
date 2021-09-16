@@ -1,0 +1,11 @@
+0000000000000000000000000000000000000000 5eee6c3db4426ba5737af72a59d9a41ef35dfeca ismaeldiazy <ismaeldiazy@gmail.com> 1631136286 +0200	commit (initial): starting the project
+5eee6c3db4426ba5737af72a59d9a41ef35dfeca 5eee6c3db4426ba5737af72a59d9a41ef35dfeca ismaeldiazy <ismaeldiazy@gmail.com> 1631136358 +0200	Branch: renamed refs/heads/master to refs/heads/main
+5eee6c3db4426ba5737af72a59d9a41ef35dfeca 0eabb413aa64a3d0b0c01a805f1cfd2484e7ddc4 ismaeldiazy <ismaeldiazy@gmail.com> 1631318694 +0200	commit: created env variables for sensitive data and models
+0eabb413aa64a3d0b0c01a805f1cfd2484e7ddc4 d0bc81e6f2eac27bd32c333452ea148d98816de8 ismaeldiazy <ismaeldiazy@gmail.com> 1631359532 +0200	commit: updated models
+d0bc81e6f2eac27bd32c333452ea148d98816de8 7d53be9c0ee1686cdabb326aa7778a6ae6ef8912 ismaeldiazy <ismaeldiazy@gmail.com> 1631399029 +0200	commit: models fixes and migration
+7d53be9c0ee1686cdabb326aa7778a6ae6ef8912 2214fd6f4980c09fcfbd3fba4808e3162ae54bf8 ismaeldiazy <ismaeldiazy@gmail.com> 1631402498 +0200	commit: serializers generated
+2214fd6f4980c09fcfbd3fba4808e3162ae54bf8 36f1cf894266d0b016439312d5cc78b7e9e517fa ismaeldiazy <ismaeldiazy@gmail.com> 1631449783 +0200	commit: serializer fixes and first simple view working
+36f1cf894266d0b016439312d5cc78b7e9e517fa 6f69b1fcad957c859465c941056579d403ec3e4f ismaeldiazy <ismaeldiazy@gmail.com> 1631484262 +0200	commit: some views, fixes and get_ip implementation
+6f69b1fcad957c859465c941056579d403ec3e4f d0b5e80fcce6f56237a6c9766f1ab8fcc52c1996 ismaeldiazy <ismaeldiazy@gmail.com> 1631526267 +0200	commit: added post request ip to request.data dict
+d0b5e80fcce6f56237a6c9766f1ab8fcc52c1996 86354b13127f16788bdabc88eace3242f4255023 ismaeldiazy <ismaeldiazy@gmail.com> 1631615688 +0200	commit: votes by ramen_pk in progress
+86354b13127f16788bdabc88eace3242f4255023 449761b51ab9b23bf6ef1c774e3753e27581cb3d ismaeldiazy <ismaeldiazy@gmail.com> 1631636016 +0200	commit: fixes and list filtered by ramen

@@ -1,7 +1,6 @@
 from votation.models import (
     RamenYa,
-    Vote,
-    RamenScore
+    Vote
     )
 from rest_framework import serializers
 
@@ -11,6 +10,7 @@ class RamenYaSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'name',
+            'total_votes',
             'address',
             'phone_number',
             'website_url',
@@ -19,6 +19,28 @@ class RamenYaSerializer(serializers.ModelSerializer):
             'updated_at'
             ]
 
+class RamenYaCreateUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RamenYa
+        fields = [
+            'name',
+            'address',
+            'phone_number',
+            'website_url',
+            'image',
+            ]
+    
+    def create(self, validated_data):
+        return RamenYa.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get('name', instance.name)
+        instance.address = validated_data.get('address', instance.address)
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
+        instance.image = validated_data.get('image', instance.image)
+        instance.save()
+        return instance
+        
 
 class VoteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,7 +48,6 @@ class VoteSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'ip',
-            'punctuation',
             'ramen',
             'created_at',
             'updated_at'
@@ -37,7 +58,6 @@ class VoteCreateUpdateSerializer(serializers.ModelSerializer):
         model = Vote
         fields = [
             'ip',
-            'punctuation',
             'ramen'
         ]
     
@@ -45,39 +65,7 @@ class VoteCreateUpdateSerializer(serializers.ModelSerializer):
         return Vote.objects.create(**validated_data)
     
     def update(self, instance, validated_data):
-        instance.ip = instance.get('ip', instance.ip)
-        instance.punctuation = instance.get('punctuation', instance.punctuation)
-        instance.ramen = instance.get('ramen', instance.ramen)
-
-
-class RamenScoreSerializer(serializers.ModelSerializer):
-    ramen = RamenYaSerializer(read_only=True)
-
-    class Meta:
-        model = RamenScore
-        fields = [
-            'id',
-            'ramen',
-            'total_score',
-            'created_at',
-            'updated_at'
-        ]
-
-
-class RamenScoreCreateUpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = RamenScore
-
-        fields = [
-            'ramen',
-            'total_score'
-        ]
-
-        def create(self, validated_data):
-            return RamenScore.objects.create(**validated_data)
-
-        def update(self, instance, validated_data):
-            instance.ramen = validated_data.get('ramen', instance.ramen)
-            instance.total_score = validated_data.get('ramen_score', instance.ramen_score)
-            instance.save()
-            return instance
+        instance.ip = validated_data.get('ip', instance.ip)
+        instance.ramen = validated_data.get('ramen', instance.ramen)
+        instance.save()
+        return instance
